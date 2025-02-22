@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Feuilles de Route</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Générateur de Feuilles de Route</h1>
+        <form id="roadmapForm">
+            <label for="concertDate">Date du concert:</label>
+            <input type="date" id="concertDate" required>
+            
+            <label for="venueName">Nom de la salle:</label>
+            <input type="text" id="venueName" value="Le Brin de Zinc" required>
+            
+            <label for="venueAddress">Adresse de la salle:</label>
+            <input type="text" id="venueAddress" value="3 Rte de la Peysse, 73000 Barberaz" required>
+            
+            <label for="technician">Technicien d'accueil:</label>
+            <select id="technician" required onchange="toggleCustomTechnicianFields()">
+                <option value="">Sélectionner</option>
+                <option value="Julien">Julien</option>
+                <option value="Antony">Antony</option>
+                <option value="Autre">Autre</option>
+            </select>
+
+            <div id="customTechnicianFields" style="display: none;">
+                <label for="customTechnicianName">Prénom:</label>
+                <input type="text" id="customTechnicianName">
+                
+                <label for="customTechnicianEmail">Adresse mail:</label>
+                <input type="email" id="customTechnicianEmail">
+                
+                <label for="customTechnicianPhone">Numéro de téléphone:</label>
+                <input type="tel" id="customTechnicianPhone">
+            </div>
+            
+            <label for="numBands">Nombre de groupes:</label>
+            <input type="number" id="numBands" min="1" required>
+            
+            <div id="bandsContainer"></div>
+            
+            <label for="mealTime">Horaire du repas:</label>
+            <input type="time" id="mealTime" value="19:00" required>
+            
+            <label for="publicOpeningTime">Horaire d'ouverture public:</label>
+            <input type="time" id="publicOpeningTime" value="20:00" required>
+            
+            <label for="concertStartTime">Heure de début du concert:</label>
+            <input type="time" id="concertStartTime" value="21:00" required>
+
+            <label for="concertEndTime">Horaire de fin de concert:</label>
+            <input type="time" id="concertEndTime" value="00:00" readonly>
+            
+            <label for="publicClosingTime">Horaire de fermeture public:</label>
+            <input type="time" id="publicClosingTime" value="01:00" required>
+            
+            <button type="button" id="generateRoadmapButton" onclick="generateRoadmap()">Générer la feuille de route</button>
+        </form>
+        
+        <div id="roadmapPreview"></div>
+        <button onclick="saveAsPDF()">Sauvegarder en PDF</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

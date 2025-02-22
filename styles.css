@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input, select, button, textarea {
+    padding: 10px;
+    margin-top: 5px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+#roadmapPreview {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+#mapImage {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.band {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.band .delete-band-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
