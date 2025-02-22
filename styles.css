@@ -73,16 +73,8 @@ button:hover {
     flex-wrap: wrap;
 }
 
-.logo {
+.logo, .map {
     max-width: 100%;
     height: auto;
-    width: auto;
-    max-height: 150px; /* Maximum height to ensure it fits */
-}
-
-.map {
-    max-width: 100%;
-    height: auto;
-    width: auto;
-    max-height: 75px; /* Maximum height to ensure it fits */
+    max-height: 100px; /* Ensures images fit on a single page */
 }
