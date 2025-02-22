@@ -172,6 +172,7 @@ function generateRoadmap() {
     roadmapHtml += `<p>Date du concert: ${concertDate}</p>`;
     roadmapHtml += `<p>Salle: ${venueName}</p>`;
     roadmapHtml += `<p>Adresse: ${venueAddress}</p>`;
+    roadmapHtml += `<div id="mapCapture" style="text-align: center; margin-top: 20px;"></div>`;
     roadmapHtml += `<p>Technicien d'accueil: ${technicianContact}</p>`;
     roadmapHtml += `<p>Horaire du repas: ${mealTime}</p>`;
     roadmapHtml += `<p>Ouverture public: ${publicOpeningTime}</p>`;
@@ -222,6 +223,11 @@ function generateRoadmap() {
     });
 
     document.getElementById('roadmapPreview').innerHTML = roadmapHtml;
+
+    html2canvas(document.getElementById('map')).then(canvas => {
+        const mapCapture = document.getElementById('mapCapture');
+        mapCapture.appendChild(canvas);
+    });
 }
 
 function saveAsPDF() {
