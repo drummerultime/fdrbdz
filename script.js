@@ -143,6 +143,8 @@ function geocodeAddress(address) {
                 } else {
                     marker = L.marker(latLng).addTo(map);
                 }
+                // Capture the map after it has been repositioned
+                setTimeout(captureMap, 1000);
             } else {
                 alert('Adresse non trouvée');
             }
@@ -151,6 +153,14 @@ function geocodeAddress(address) {
             console.error('Erreur lors du géocodage:', error);
             alert('Erreur lors du géocodage');
         });
+}
+
+function captureMap() {
+    html2canvas(document.getElementById('map')).then(canvas => {
+        const mapCapture = document.getElementById('mapCapture');
+        mapCapture.innerHTML = '';
+        mapCapture.appendChild(canvas);
+    });
 }
 
 function generateRoadmap() {
@@ -223,15 +233,6 @@ function generateRoadmap() {
     });
 
     document.getElementById('roadmapPreview').innerHTML = roadmapHtml;
-
-    // Ajouter un délai pour s'assurer que la carte est rendue avant de capturer l'image
-    setTimeout(() => {
-        html2canvas(document.getElementById('map')).then(canvas => {
-            const mapCapture = document.getElementById('mapCapture');
-            mapCapture.innerHTML = '';
-            mapCapture.appendChild(canvas);
-        });
-    }, 1000);
 }
 
 function saveAsPDF() {
