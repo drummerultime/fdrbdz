@@ -1,6 +1,17 @@
+let map;
+let marker;
+
 document.getElementById('numBands').addEventListener('change', function() {
     updateBands();
 });
+
+function initMap() {
+    map = L.map('map').setView([45.5646, 5.9203], 13); // Coordonnées approximatives de Barberaz
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+}
 
 function updateBands() {
     const numBands = document.getElementById('numBands').value;
@@ -118,10 +129,28 @@ function toggleCustomTechnicianFields() {
     }
 }
 
-function getMapImageUrl(address) {
-    const apiKey = 'YOUAIzaSyD86RlP_5e_GfOxwiNwNWzTI-gcrh1qiS0'; // Remplacez par votre clé API Google Maps
-    const encodedAddress = encodeURIComponent(address);
-    return `https://maps.googleapis.com/maps/api/staticmap?center=${encodedAddress}&zoom=15&size=600x400&maptype=roadmap&markers=color:red%7Clabel:S%7C${encodedAddress}&key=${apiKey}`;
+function geocodeAddress(address) {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                const { lat, lon } = data[0];
+                const latLng = [parseFloat(lat), parseFloat(lon)];
+                map.setView(latLng, 15);
+                if (marker) {
+                    marker.setLatLng(latLng);
+                } else {
+                    marker = L.marker(latLng).addTo(map);
+                }
+            } else {
+                alert('Adresse non trouvée');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors du géocodage:', error);
+            alert('Erreur lors du géocodage');
+        });
 }
 
 function generateRoadmap() {
@@ -137,13 +166,12 @@ function generateRoadmap() {
     const concertEndTime = document.getElementById('concertEndTime').value;
     const publicClosingTime = document.getElementById('publicClosingTime').value;
 
-    const mapImageUrl = getMapImageUrl(venueAddress);
+    geocodeAddress(venueAddress);
 
     let roadmapHtml = `<h2>Feuille de Route</h2>`;
     roadmapHtml += `<p>Date du concert: ${concertDate}</p>`;
     roadmapHtml += `<p>Salle: ${venueName}</p>`;
     roadmapHtml += `<p>Adresse: ${venueAddress}</p>`;
-    roadmapHtml += `<img id="mapImage" src="${mapImageUrl}" alt="Map">`;
     roadmapHtml += `<p>Technicien d'accueil: ${technicianContact}</p>`;
     roadmapHtml += `<p>Horaire du repas: ${mealTime}</p>`;
     roadmapHtml += `<p>Ouverture public: ${publicOpeningTime}</p>`;
@@ -206,3 +234,6 @@ function saveAsPDF() {
     pdfWindow.document.close();
     pdfWindow.print();
 }
+
+// Initialize the map when the window loads
+window.onload = initMap;

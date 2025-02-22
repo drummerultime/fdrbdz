@@ -42,11 +42,10 @@ textarea {
     position: relative;
 }
 
-#mapImage {
+#map {
     margin-top: 20px;
     width: 100%;
-    max-width: 600px;
-    height: auto;
+    height: 400px;
 }
 
 button {
