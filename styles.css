@@ -66,16 +66,23 @@ button:hover {
     right: 10px;
 }
 
+.logo-container, .map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100px; /* Further reduced size */
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    max-height: 150px; /* Maximum height to ensure it fits */
 }
 
 .map {
-    width: 100%;
-    max-width: 50px; /* Further reduced size */
-    display: block;
-    margin-top: 10px;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    max-height: 75px; /* Maximum height to ensure it fits */
 }
