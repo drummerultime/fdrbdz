@@ -70,12 +70,12 @@ button:hover {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 400px; /* 4 times larger width */
+    width: 300px; /* 3 times larger width */
 }
 
 .map {
     width: 100%;
-    max-width: 300px;
+    max-width: 150px; /* 2 times smaller width */
     display: block;
     margin-top: 10px;
 }
