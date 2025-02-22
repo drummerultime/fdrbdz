@@ -66,22 +66,19 @@ button:hover {
     right: 10px;
 }
 
-.logo-container {
+.logo-container, .map-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
-.map-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.logo, .map {
-    max-width: 100%;
+.logo {
+    width: 150px;
     height: auto;
-    max-height: 80px; /* Ensures images fit on a single page */
+}
+
+.map {
+    width: 75px;
+    height: auto;
 }
