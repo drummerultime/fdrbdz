@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générateur de Feuilles de Route</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
+        <img src="https://mega.nz/file/VeQQlQjZ#pGo51lF89FNr5I_SBAZO3sQOmfOofbeEUFDTWr_NKkY" alt="Logo" class="logo">
         <h1>Générateur de Feuilles de Route</h1>
         <form id="roadmapForm">
             <label for="concertDate">Date du concert:</label>
@@ -66,9 +64,7 @@
         </form>
         
         <div id="roadmapPreview"></div>
-        <div id="mapContainer" style="height: 400px; width: 100%; margin-top: 20px;">
-            <div id="map" style="height: 100%;"></div>
-        </div>
+        
         <button onclick="saveAsPDF()">Sauvegarder en PDF</button>
     </div>
 </body>
