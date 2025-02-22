@@ -224,10 +224,14 @@ function generateRoadmap() {
 
     document.getElementById('roadmapPreview').innerHTML = roadmapHtml;
 
-    html2canvas(document.getElementById('map')).then(canvas => {
-        const mapCapture = document.getElementById('mapCapture');
-        mapCapture.appendChild(canvas);
-    });
+    // Ajouter un délai pour s'assurer que la carte est rendue avant de capturer l'image
+    setTimeout(() => {
+        html2canvas(document.getElementById('map')).then(canvas => {
+            const mapCapture = document.getElementById('mapCapture');
+            mapCapture.innerHTML = '';
+            mapCapture.appendChild(canvas);
+        });
+    }, 1000);
 }
 
 function saveAsPDF() {
