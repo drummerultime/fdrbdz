@@ -131,10 +131,11 @@ function generateRoadmap() {
     const concertEndTime = document.getElementById('concertEndTime').value;
     const publicClosingTime = document.getElementById('publicClosingTime').value;
 
-    let roadmapHtml = `<h2>Feuille de Route</h2>`;
+    let roadmapHtml = `<img src="images/logo.png" alt="Logo" class="logo">`;
+    roadmapHtml += `<h2>Feuille de Route</h2>`;
     roadmapHtml += `<p>Date du concert: ${concertDate}</p>`;
     roadmapHtml += `<p>Salle: ${venueName}</p>`;
-    roadmapHtml += `<p>Adresse: ${venueAddress} <br><img src="https://mega.nz/file/kPZzGZRa#Oe1oDRQ5dCFRt7TSIf3TpUUKB7wk-N15xd2nMu15udo" alt="Map" class="map"></p>`;
+    roadmapHtml += `<p>Adresse: ${venueAddress} <br><img src="images/map.png" alt="Map" class="map"></p>`;
     roadmapHtml += `<p>Technicien d'accueil: ${technicianContact}</p>`;
     roadmapHtml += `<p>Horaire du repas: ${mealTime}</p>`;
     roadmapHtml += `<p>Ouverture public: ${publicOpeningTime}</p>`;
