@@ -8,12 +8,12 @@ function updateBands() {
     bandsContainer.innerHTML = '';
 
     for (let i = 0; i < numBands; i++) {
-        addBand();
+        addBand(i + 1);
     }
     updateConcertEndTime();
 }
 
-function addBand() {
+function addBand(bandNumber) {
     const bandsContainer = document.getElementById('bandsContainer');
     const bandDiv = document.createElement('div');
     bandDiv.classList.add('band');
@@ -28,7 +28,7 @@ function addBand() {
     });
 
     const bandNameLabel = document.createElement('label');
-    bandNameLabel.textContent = `Nom du groupe:`;
+    bandNameLabel.textContent = `Nom du groupe ${bandNumber}:`;
     const bandNameInput = document.createElement('input');
     bandNameInput.type = 'text';
     bandNameInput.required = true;
@@ -186,31 +186,13 @@ function generateRoadmap() {
     // Calcul des horaires d'arrivée et de balance
     roadmapHtml += `<h3>Horaires d'arrivée et de balance</h3>`;
     const arrivalBands = [...bands].reverse();
-    if (numBands == 1) {
-        roadmapHtml += `<p>${arrivalBands[0].bandName} - Arrivée: 16:00 - Balance: 16:00 à 17:30</p>`;
-    } else if (numBands == 2) {
-        roadmapHtml += `<p>${arrivalBands[0].bandName} - Arrivée: 16:00 - Balance: 16:00 à 17:30</p>`;
-        roadmapHtml += `<p>${arrivalBands[1].bandName} - Arrivée: 17:30 - Balance: 17:30 à 19:00</p>`;
-    } else if (numBands == 3) {
-        roadmapHtml += `<p>${arrivalBands[0].bandName} - Arrivée: 15:00 - Balance: 15:00 à 16:30</p>`;
-        roadmapHtml += `<p>${arrivalBands[1].bandName} - Arrivée: 16:30 - Balance: 16:30 à 18:00</p>`;
-        roadmapHtml += `<p>${arrivalBands[2].bandName} - Arrivée: 18:00 - Balance: 18:00 à 19:30</p>`;
-    } else if (numBands == 4) {
-        roadmapHtml += `<p>${arrivalBands[3].bandName} - Arrivée: 15:00 - Balance: 15:00 à 16:00</p>`;
-        roadmapHtml += `<p>${arrivalBands[2].bandName} - Arrivée: 16:00 - Balance: 16:00 à 17:00</p>`;
-        roadmapHtml += `<p>${arrivalBands[1].bandName} - Arrivée: 17:00 - Balance: 17:00 à 18:00</p>`;
-        roadmapHtml += `<p>${arrivalBands[0].bandName} - Arrivée: 18:00 - Balance: 18:00 à 19:00</p>`;
-    } else {
-        let currentTime = convertTimeToMinutes(concertStartTime);
-        arrivalBands.forEach((band) => {
-            currentTime -= parseInt(band.changeoverTime);
-            roadmapHtml += `<p>${band.bandName} - Arrivée: ${convertMinutesToTime(currentTime)} - Balance: ${convertMinutesToTime(currentTime)} (${band.concertDuration} minutes)</p>`;
-            currentTime -= parseInt(band.concertDuration);
-        });
-    }
+    arrivalBands.forEach((band, index) => {
+        let arrivalTime = 15 + index; // Start from 15:00
+        roadmapHtml += `<p>${band.bandName} - Arrivée: ${String(arrivalTime).padStart(2, '0')}:00 - Balance: ${String(arrivalTime).padStart(2, '0')}:00 à ${String(arrivalTime + 1).padStart(2, '0')}:00</p>`;
+    });
 
     roadmapHtml += `<h3>Ordre de passage des groupes</h3>`;
-    currentTime = convertTimeToMinutes(concertStartTime);
+    let currentTime = convertTimeToMinutes(concertStartTime);
     bands.forEach((band, index) => {
         roadmapHtml += `<p>${index + 1}. ${band.bandName} - Début: ${convertMinutesToTime(currentTime)} - Durée: ${band.concertDuration} minutes</p>`;
         currentTime += parseInt(band.concertDuration);
