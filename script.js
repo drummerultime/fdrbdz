@@ -31,6 +31,7 @@ function addBand(bandNumber) {
     bandNameLabel.textContent = `Nom du groupe ${bandNumber}:`;
     const bandNameInput = document.createElement('input');
     bandNameInput.type = 'text';
+    bandNameInput.dataset.bandNumber = bandNumber; // Store the band number in the dataset
     bandNameInput.required = true;
 
     const concertDurationLabel = document.createElement('label');
@@ -139,20 +140,6 @@ function formatDate(date) {
     return `${day}/${month}/${year}`;
 }
 
-function updateTimes() {
-    const concertDate = new Date(document.getElementById('concertDate').value);
-    const dayOfWeek = concertDate.getUTCDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-    
-    if (dayOfWeek === 0) { // Sunday
-        document.getElementById('publicOpeningTime').value = '19:00';
-        document.getElementById('concertStartTime').value = '20:00';
-    } else { // Monday to Saturday
-        document.getElementById('publicOpeningTime').value = '20:00';
-        document.getElementById('concertStartTime').value = '21:00';
-    }
-    updateConcertEndTime();
-}
-
 function generateRoadmap() {
     const concertDate = document.getElementById('concertDate').value;
     const venueName = document.getElementById('venueName').value;
@@ -190,11 +177,12 @@ function generateRoadmap() {
     const bands = [];
     const bandDivs = document.querySelectorAll('.band');
     bandDivs.forEach((bandDiv, index) => {
+        const bandNumber = parseInt(bandDiv.querySelector('input[type="text"]').dataset.bandNumber);
         const bandName = bandDiv.querySelector('input[type="text"]').value;
         const concertDuration = bandDiv.querySelector('input[type="number"]').value;
         const changeoverTime = bandDiv.querySelectorAll('input[type="number"]')[1].value;
 
-        bands.push({ bandName, concertDuration, changeoverTime });
+        bands.push({ bandNumber, bandName, concertDuration, changeoverTime });
     });
 
     // Calcul des horaires d'arrivée et de balance
@@ -202,7 +190,7 @@ function generateRoadmap() {
     if (numBands == 1 || numBands == 2) {
         let arrivalTime = 16 * 60;
         const balanceDuration = 90; // 1h30 for each band
-        bands.reverse().forEach((band) => {
+        bands.sort((a, b) => b.bandNumber - a.bandNumber).forEach((band) => {
             const balanceEndTime = arrivalTime + balanceDuration;
             roadmapHtml += `<p>${band.bandName} - Arrivée: ${convertMinutesToTime(arrivalTime)} - Balance: ${convertMinutesToTime(arrivalTime)} à ${convertMinutesToTime(balanceEndTime)}</p>`;
             arrivalTime = balanceEndTime;
@@ -210,7 +198,7 @@ function generateRoadmap() {
     } else if (numBands == 3) {
         let arrivalTime = 15 * 60;
         const balanceDurations = [60, 90, 90]; // 1h for last band, 1h30 for others
-        bands.reverse().forEach((band, index) => {
+        bands.sort((a, b) => b.bandNumber - a.bandNumber).forEach((band, index) => {
             const balanceEndTime = arrivalTime + balanceDurations[index];
             roadmapHtml += `<p>${band.bandName} - Arrivée: ${convertMinutesToTime(arrivalTime)} - Balance: ${convertMinutesToTime(arrivalTime)} à ${convertMinutesToTime(balanceEndTime)}</p>`;
             arrivalTime = balanceEndTime;
@@ -218,7 +206,7 @@ function generateRoadmap() {
     } else if (numBands == 4) {
         let arrivalTime = 15 * 60;
         const balanceDuration = 60; // 1h for each band
-        bands.reverse().forEach((band) => {
+        bands.sort((a, b) => b.bandNumber - a.bandNumber).forEach((band) => {
             const balanceEndTime = arrivalTime + balanceDuration;
             roadmapHtml += `<p>${band.bandName} - Arrivée: ${convertMinutesToTime(arrivalTime)} - Balance: ${convertMinutesToTime(arrivalTime)} à ${convertMinutesToTime(balanceEndTime)}</p>`;
             arrivalTime = balanceEndTime;
@@ -227,7 +215,7 @@ function generateRoadmap() {
 
     roadmapHtml += `<h3>Ordre de passage des groupes</h3>`;
     let currentTime = convertTimeToMinutes(concertStartTime);
-    bands.forEach((band, index) => {
+    bands.sort((a, b) => a.bandNumber - b.bandNumber).forEach((band, index) => {
         roadmapHtml += `<p>${index + 1}. ${band.bandName} - Début: ${convertMinutesToTime(currentTime)} - Durée: ${band.concertDuration} minutes</p>`;
         currentTime += parseInt(band.concertDuration);
         if (index < bands.length - 1) {
