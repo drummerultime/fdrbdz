@@ -93,6 +93,9 @@ function updateConcertEndTime() {
         totalMinutes += concertDuration + changeoverTime;
     });
 
+    // Handle time overflow past midnight
+    totalMinutes = totalMinutes % (24 * 60);
+
     document.getElementById('concertEndTime').value = convertMinutesToTime(totalMinutes);
 }
 
@@ -157,6 +160,7 @@ function generateRoadmap() {
     roadmapHtml += `<p>Salle: ${venueName}</p>`;
     roadmapHtml += `<p>Adresse: ${venueAddress}</p>`;
     roadmapHtml += `<p>Technicien d'accueil: ${technicianContact}</p>`;
+    roadmapHtml += `<p class="italic">Merci de prévenir en cas de retard ou difficultés pendant le voyage</p>`;
     if (runToStation === 'oui') {
         roadmapHtml += `<p>Run à la gare: Oui, Horaire: ${stationTime}</p>`;
     }
@@ -165,6 +169,9 @@ function generateRoadmap() {
     roadmapHtml += `<p>Début du concert: ${concertStartTime}</p>`;
     roadmapHtml += `<p>Fin de concert: ${concertEndTime}</p>`;
     roadmapHtml += `<p>Fermeture public: ${publicClosingTime}</p>`;
+
+    roadmapHtml += `<h3>Wifi</h3>`;
+    roadmapHtml += `<p>ID : BDZ_EXT2<br>Mdp : BDZ73000</p>`;
 
     const bands = [];
     const bandDivs = document.querySelectorAll('.band');
@@ -188,8 +195,13 @@ function generateRoadmap() {
         roadmapHtml += `<p>${arrivalBands[0].bandName} - Arrivée: 15:00 - Balance: 15:00 à 16:30</p>`;
         roadmapHtml += `<p>${arrivalBands[1].bandName} - Arrivée: 16:30 - Balance: 16:30 à 18:00</p>`;
         roadmapHtml += `<p>${arrivalBands[2].bandName} - Arrivée: 18:00 - Balance: 18:00 à 19:30</p>`;
+    } else if (numBands == 4) {
+        roadmapHtml += `<p>${arrivalBands[3].bandName} - Arrivée: 15:00 - Balance: 15:00 à 16:00</p>`;
+        roadmapHtml += `<p>${arrivalBands[2].bandName} - Arrivée: 16:00 - Balance: 16:00 à 17:00</p>`;
+        roadmapHtml += `<p>${arrivalBands[1].bandName} - Arrivée: 17:00 - Balance: 17:00 à 18:00</p>`;
+        roadmapHtml += `<p>${arrivalBands[0].bandName} - Arrivée: 18:00 - Balance: 18:00 à 19:00</p>`;
     } else {
-        let currentTime = convertTimeToMinutes(concertEndTime);
+        let currentTime = convertTimeToMinutes(concertStartTime);
         arrivalBands.forEach((band) => {
             currentTime -= parseInt(band.changeoverTime);
             roadmapHtml += `<p>${band.bandName} - Arrivée: ${convertMinutesToTime(currentTime)} - Balance: ${convertMinutesToTime(currentTime)} (${band.concertDuration} minutes)</p>`;
@@ -210,7 +222,7 @@ function generateRoadmap() {
 
     if (comments) {
         roadmapHtml += `<h3>Commentaires</h3>`;
-        roadmapHtml += `<p>${comments}</p>`;
+        roadmapHtml += `<p class="italic">${comments}</p>`;
     }
 
     document.getElementById('roadmapPreview').innerHTML = roadmapHtml;

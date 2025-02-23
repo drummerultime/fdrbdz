@@ -65,3 +65,8 @@ button:hover {
     top: 10px;
     right: 10px;
 }
+
+.italic {
+    font-style: italic;
+    font-size: 0.9em;
+}
