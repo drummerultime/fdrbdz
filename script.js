@@ -139,6 +139,20 @@ function formatDate(date) {
     return `${day}/${month}/${year}`;
 }
 
+function updateTimes() {
+    const concertDate = new Date(document.getElementById('concertDate').value);
+    const dayOfWeek = concertDate.getUTCDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    
+    if (dayOfWeek === 0) { // Sunday
+        document.getElementById('publicOpeningTime').value = '19:00';
+        document.getElementById('concertStartTime').value = '20:00';
+    } else { // Monday to Saturday
+        document.getElementById('publicOpeningTime').value = '20:00';
+        document.getElementById('concertStartTime').value = '21:00';
+    }
+    updateConcertEndTime();
+}
+
 function generateRoadmap() {
     const concertDate = document.getElementById('concertDate').value;
     const venueName = document.getElementById('venueName').value;
@@ -185,11 +199,31 @@ function generateRoadmap() {
 
     // Calcul des horaires d'arrivée et de balance
     roadmapHtml += `<h3>Horaires d'arrivée et de balance</h3>`;
-    const arrivalBands = [...bands].reverse();
-    arrivalBands.forEach((band, index) => {
-        let arrivalTime = 15 + index; // Start from 15:00
-        roadmapHtml += `<p>${band.bandName} - Arrivée: ${String(arrivalTime).padStart(2, '0')}:00 - Balance: ${String(arrivalTime).padStart(2, '0')}:00 à ${String(arrivalTime + 1).padStart(2, '0')}:00</p>`;
-    });
+    if (numBands == 1 || numBands == 2) {
+        let arrivalTime = 16 * 60;
+        const balanceDuration = 90; // 1h30 for each band
+        bands.reverse().forEach((band) => {
+            const balanceEndTime = arrivalTime + balanceDuration;
+            roadmapHtml += `<p>${band.bandName} - Arrivée: ${convertMinutesToTime(arrivalTime)} - Balance: ${convertMinutesToTime(arrivalTime)} à ${convertMinutesToTime(balanceEndTime)}</p>`;
+            arrivalTime = balanceEndTime;
+        });
+    } else if (numBands == 3) {
+        let arrivalTime = 15 * 60;
+        const balanceDurations = [60, 90, 90]; // 1h for last band, 1h30 for others
+        bands.reverse().forEach((band, index) => {
+            const balanceEndTime = arrivalTime + balanceDurations[index];
+            roadmapHtml += `<p>${band.bandName} - Arrivée: ${convertMinutesToTime(arrivalTime)} - Balance: ${convertMinutesToTime(arrivalTime)} à ${convertMinutesToTime(balanceEndTime)}</p>`;
+            arrivalTime = balanceEndTime;
+        });
+    } else if (numBands == 4) {
+        let arrivalTime = 15 * 60;
+        const balanceDuration = 60; // 1h for each band
+        bands.reverse().forEach((band) => {
+            const balanceEndTime = arrivalTime + balanceDuration;
+            roadmapHtml += `<p>${band.bandName} - Arrivée: ${convertMinutesToTime(arrivalTime)} - Balance: ${convertMinutesToTime(arrivalTime)} à ${convertMinutesToTime(balanceEndTime)}</p>`;
+            arrivalTime = balanceEndTime;
+        });
+    }
 
     roadmapHtml += `<h3>Ordre de passage des groupes</h3>`;
     let currentTime = convertTimeToMinutes(concertStartTime);

@@ -12,7 +12,7 @@
         <h1>Générateur de Feuilles de Route</h1>
         <form id="roadmapForm">
             <label for="concertDate">Date du concert:</label>
-            <input type="date" id="concertDate" required>
+            <input type="date" id="concertDate" required onchange="updateTimes()">
             
             <label for="venueName">Nom de la salle:</label>
             <input type="text" id="venueName" value="Le Brin de Zinc" required>
