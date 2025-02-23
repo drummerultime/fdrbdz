@@ -59,6 +59,7 @@ function addBand() {
 
     bandsContainer.appendChild(bandDiv);
     updateNumBands();
+    updateConcertEndTime();
 }
 
 function updateNumBands() {
@@ -80,6 +81,8 @@ function convertMinutesToTime(minutes) {
 
 function updateConcertEndTime() {
     const concertStartTime = document.getElementById('concertStartTime').value;
+    if (!concertStartTime) return;
+
     const bandDivs = document.querySelectorAll('.band');
     
     let totalMinutes = convertTimeToMinutes(concertStartTime);
@@ -118,24 +121,45 @@ function toggleCustomTechnicianFields() {
     }
 }
 
+function toggleRunToStationFields() {
+    const runToStation = document.getElementById('runToStation').value;
+    const runToStationFields = document.getElementById('runToStationFields');
+    if (runToStation === 'oui') {
+        runToStationFields.style.display = 'block';
+    } else {
+        runToStationFields.style.display = 'none';
+    }
+}
+
+function formatDate(date) {
+    const [year, month, day] = date.split('-');
+    return `${day}/${month}/${year}`;
+}
+
 function generateRoadmap() {
     const concertDate = document.getElementById('concertDate').value;
     const venueName = document.getElementById('venueName').value;
     const venueAddress = document.getElementById('venueAddress').value;
     const technician = document.getElementById('technician').value;
     const technicianContact = getTechnicianContact(technician);
+    const runToStation = document.getElementById('runToStation').value;
+    const stationTime = document.getElementById('stationTime').value;
     const numBands = document.getElementById('numBands').value;
     const mealTime = document.getElementById('mealTime').value;
     const publicOpeningTime = document.getElementById('publicOpeningTime').value;
     const concertStartTime = document.getElementById('concertStartTime').value;
     const concertEndTime = document.getElementById('concertEndTime').value;
     const publicClosingTime = document.getElementById('publicClosingTime').value;
+    const comments = document.getElementById('comments').value;
 
     let roadmapHtml = `<h2>Feuille de Route</h2>`;
-    roadmapHtml += `<p>Date du concert: ${concertDate}</p>`;
+    roadmapHtml += `<p>Date du concert: ${formatDate(concertDate)}</p>`;
     roadmapHtml += `<p>Salle: ${venueName}</p>`;
     roadmapHtml += `<p>Adresse: ${venueAddress}</p>`;
     roadmapHtml += `<p>Technicien d'accueil: ${technicianContact}</p>`;
+    if (runToStation === 'oui') {
+        roadmapHtml += `<p>Run à la gare: Oui, Horaire: ${stationTime}</p>`;
+    }
     roadmapHtml += `<p>Horaire du repas: ${mealTime}</p>`;
     roadmapHtml += `<p>Ouverture public: ${publicOpeningTime}</p>`;
     roadmapHtml += `<p>Début du concert: ${concertStartTime}</p>`;
@@ -183,6 +207,11 @@ function generateRoadmap() {
             currentTime += parseInt(band.changeoverTime);
         }
     });
+
+    if (comments) {
+        roadmapHtml += `<h3>Commentaires</h3>`;
+        roadmapHtml += `<p>${comments}</p>`;
+    }
 
     document.getElementById('roadmapPreview').innerHTML = roadmapHtml;
 }
