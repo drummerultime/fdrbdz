@@ -1,112 +1,325 @@
 body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-color: #f5f7fa;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: #f0f4f8;
     margin: 0;
-    padding: 2rem 0;
-    color: #2d3748;
-    line-height: 1.5;
+    padding: 3rem 1rem;
+    color: #1a202c;
+    line-height: 1.6;
 }
 
 .container {
-    width: 90%;
+    width: 92%;
     max-width: 1200px;
     margin: 0 auto;
     background: #fff;
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-h1 {
+.form-header {
     text-align: center;
-    color: #1a365d;
-    font-size: 2.25rem;
-    margin-bottom: 2rem;
-    font-weight: 600;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.form-header h1 {
+    color: #2d3748;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 1.5rem 0;
+    letter-spacing: -0.02em;
 }
 
 .logo {
-    display: block;
-    margin: 0 auto 2rem;
-    max-width: 595px; /* A4 width in pixels */
-    width: 100%;
+    max-width: 400px;
     height: auto;
+    margin-bottom: 2rem;
 }
 
-form {
+.modern-form {
     display: grid;
-    gap: 1.5rem;
-    max-width: 800px;
-    margin: 0 auto;
+    gap: 3rem;
 }
 
-label {
+.form-section {
+    background: #f8fafc;
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-section h2 {
+    color: #2d3748;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.form-group {
+    margin-bottom: 1.75rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.75rem;
     font-weight: 500;
     color: #4a5568;
-    margin-bottom: 0.5rem;
-    display: block;
+    font-size: 1.1rem;
 }
 
-input, select, textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.875rem 1rem;
     border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    background-color: #fff;
-    color: #2d3748;
+    border-radius: 8px;
     font-size: 1rem;
     transition: all 0.2s;
+    background-color: #fff;
 }
 
-input:focus, select:focus, textarea:focus {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     outline: none;
     border-color: #4299e1;
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
 }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
+.nested-form-group {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.bands-section {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.band {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.form-actions {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+button {
+    background-color: #3182ce;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #2b6cb0;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.preview-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 2px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 2rem;
+    }
+    
+    .form-section {
+        padding: 1.5rem;
+    }
+    
+    .form-header h1 {
+        font-size: 2rem;
+    }
+    
+    .logo {
+        max-width: 300px;
+    }
 }
 
 #roadmapPreview {
-    margin-top: 2.5rem;
-    padding: 2rem;
-    border-radius: 8px;
+    margin-top: 2rem;
+    padding: 3rem;
+    border-radius: 16px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     line-height: 1.6;
 }
 
 #roadmapPreview h2 {
     color: #1a365d;
-    font-size: 1.875rem;
+    font-size: 2rem;
     margin-bottom: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 1rem;
 }
 
 #roadmapPreview h3 {
     color: #2d4a8c;
-    font-size: 1.5rem;
-    margin: 1.5rem 0 1rem;
-    font-weight: 500;
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 #roadmapPreview p {
     margin: 0.75rem 0;
+    font-size: 1.1rem;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+@media print {
+    body {
+        background: none;
+        padding: 0;
+    }
+
+    .container {
+        width: 100%;
+        max-width: none;
+        padding: 1.5rem 2rem;
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+    }
+    
+    #roadmapPreview {
+        padding: 0;
+        box-shadow: none;
+        font-size: 11pt;
+    }
+
+    #roadmapPreview h2 {
+        font-size: 16pt;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 0.5rem;
+    }
+
+    #roadmapPreview h3 {
+        font-size: 14pt;
+        margin: 1rem 0 0.5rem;
+        page-break-after: avoid;
+    }
+
+    #roadmapPreview p {
+        margin: 0.3rem 0;
+        font-size: 11pt;
+        line-height: 1.4;
+        orphans: 3;
+        widows: 3;
+    }
+
+    img[src="map.png"] {
+        width: 200px !important;
+        margin: 1rem 0;
+    }
+
+    img[src="logo.png"] {
+        max-width: 300px !important;
+        margin: 1rem auto;
+    }
+
+    button, .form-actions, .preview-actions {
+        display: none !important;
+    }
+
+    .page-break {
+        page-break-before: always;
+        margin-top: 1rem;
+        padding-top: 1rem;
+    }
+
+    .first-page {
+        min-height: auto;
+        page-break-after: always;
+    }
+
+    .form-section {
+        page-break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+
+    .venue-info {
+        page-break-inside: avoid;
+        margin: 1rem 0;
+        padding: 1rem;
+        border: 1px solid #e2e8f0;
+    }
+
+}
+
+#roadmapPreview h2 {
+    color: #1a365d;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+#roadmapPreview h3 {
+    color: #2d4a8c;
+    font-size: 1.35rem;
+    margin: 2rem 0 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+#roadmapPreview p {
+    margin: 0.75rem 0;
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
 }
 
 button {
-    background-color: #4299e1;
+    background-color: #3182ce;
     color: #fff;
     border: none;
-    border-radius: 6px;
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 1rem;
+    transition: all 0.2s ease-in-out;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
@@ -121,19 +334,26 @@ button:active {
 .band {
     background-color: #f8fafc;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-top: 1rem;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 1.5rem;
     position: relative;
+    transition: all 0.2s ease;
+}
+
+.band:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
 }
 
 .band .delete-band-button {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.25rem;
+    right: 1.25rem;
     background-color: #fc8181;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
+    border-radius: 6px;
 }
 
 .band .delete-band-button:hover {
@@ -143,14 +363,16 @@ button:active {
 .italic {
     font-style: italic;
     color: #718096;
-    font-size: 0.9375rem;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 #customTechnicianFields, #runToStationFields {
     background-color: #f8fafc;
-    padding: 1.25rem;
-    border-radius: 8px;
-    margin-top: 0.5rem;
+    padding: 1.75rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    border: 1px solid #e2e8f0;
 }
 
 @media (max-width: 768px) {
@@ -166,4 +388,111 @@ button:active {
     h1 {
         font-size: 1.875rem;
     }
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.form-header h1 {
+    color: #2d3748;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 1.5rem 0;
+    letter-spacing: -0.02em;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+.preview-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e2e8f0;
+}
+
+.preview-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.primary-button {
+    background-color: #3182ce;
+}
+
+.secondary-button {
+    background-color: #718096;
+}
+
+.logo {
+    max-width: 300px;
+    height: auto;
+}
+
+.event-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.event-date {
+    font-size: 1.2rem;
+    color: #4a5568;
+    margin-top: 0.5rem;
+}
+
+.venue-info {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.venue-details {
+    flex: 1;
+}
+
+.venue-details p {
+    margin: 1rem 0;
+}
+
+.notice {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #ebf8ff;
+    border-radius: 8px;
+    color: #2c5282;
+    text-align: center;
 }

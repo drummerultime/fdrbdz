@@ -157,12 +157,26 @@ function generateRoadmap() {
     const publicClosingTime = document.getElementById('publicClosingTime').value;
     const comments = document.getElementById('comments').value;
 
-    let roadmapHtml = `<div style="text-align: center; margin-bottom: 1.5rem;"><img src="logo.png" alt="Le Brin de Zinc" style="max-width: 595px; width: 100%; height: auto;"></div><h2>${eventName}</h2>`;
-    roadmapHtml += `<p>Date du concert: ${formatDate(concertDate)}</p>`;
-    roadmapHtml += `<p>Salle: ${venueName}</p>`;
-    roadmapHtml += `<p>Adresse: ${venueAddress}</p>`;
-    roadmapHtml += `<p>Technicien d'accueil: ${technicianContact}</p>`;
-    roadmapHtml += `<p class="italic">Merci de prévenir en cas de retard ou difficultés pendant le voyage</p>`;
+    let roadmapHtml = `<div class="first-page">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <img src="logo.png" alt="Le Brin de Zinc" style="max-width: 595px; width: 100%; height: auto;">
+        </div>
+        <div class="event-header">
+            <h2>${eventName}</h2>
+            <p class="event-date">Date du concert: ${formatDate(concertDate)}</p>
+        </div>
+        <div class="venue-info">
+            <div class="venue-details">
+                <p><strong>Salle:</strong> ${venueName}</p>
+                <p><strong>Adresse:</strong> ${venueAddress}</p>
+                <p><strong>Technicien d'accueil:</strong> ${technicianContact}</p>
+            </div>
+            <img src="map.png" alt="Plan d'accès" style="width: 350px; height: auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        <p class="notice italic">Merci de prévenir en cas de retard ou difficultés pendant le voyage</p>
+    </div>
+    <div class="page-break">`;
+
     if (runToStation === 'oui') {
         roadmapHtml += `<p>Run à la gare: Oui, Horaire: ${stationTime}</p>`;
     }
@@ -171,6 +185,7 @@ function generateRoadmap() {
     roadmapHtml += `<p>Début du concert: ${concertStartTime}</p>`;
     roadmapHtml += `<p>Fin de concert: ${concertEndTime}</p>`;
     roadmapHtml += `<p>Fermeture public: ${publicClosingTime}</p>`;
+
 
     roadmapHtml += `<h3>Wifi</h3>`;
     roadmapHtml += `<p>ID : BDZ_EXT2<br>Mdp : BDZ73000</p>`;

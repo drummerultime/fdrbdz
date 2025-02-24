@@ -9,80 +9,139 @@
 </head>
 <body>
     <div class="container">
-        <img src="logo.png" alt="Le Brin de Zinc" class="logo">
-        <h1>Générateur de Feuilles de Route</h1>
-        <form id="roadmapForm">
-            <label for="eventName">Nom de la soirée:</label>
-            <input type="text" id="eventName" required>
+        <header class="form-header">
+            <img src="logo.png" alt="Le Brin de Zinc" class="logo">
+            <h1>Générateur de Feuilles de Route</h1>
+        </header>
+        <form id="roadmapForm" class="modern-form">
+            <section class="form-section">
+                <h2>Informations de l'événement</h2>
+                <div class="form-group">
+                    <label for="eventName">Nom de la soirée:</label>
+                    <input type="text" id="eventName" required placeholder="Entrez le nom de l'événement">
+                </div>
 
-            <label for="concertDate">Date du concert:</label>
-            <input type="date" id="concertDate" required onchange="updateTimes()">
-            
-            <label for="venueName">Nom de la salle:</label>
-            <input type="text" id="venueName" value="Le Brin de Zinc" required>
-            
-            <label for="venueAddress">Adresse de la salle:</label>
-            <input type="text" id="venueAddress" value="3 Rte de la Peysse, 73000 Barberaz" required>
-            
-            <label for="technician">Technicien d'accueil:</label>
-            <select id="technician" required onchange="toggleCustomTechnicianFields()">
-                <option value="">Sélectionner</option>
-                <option value="Julien">Julien</option>
-                <option value="Antony">Antony</option>
-                <option value="Autre">Autre</option>
-            </select>
+                <div class="form-group">
+                    <label for="concertDate">Date du concert:</label>
+                    <input type="date" id="concertDate" required onchange="updateTimes()">
+                </div>
+            </section>
 
-            <div id="customTechnicianFields" style="display: none;">
-                <label for="customTechnicianName">Prénom:</label>
-                <input type="text" id="customTechnicianName">
+            <section class="form-section">
+                <h2>Informations du lieu</h2>
+                <div class="form-group">
+                    <label for="venueName">Nom de la salle:</label>
+                    <input type="text" id="venueName" value="Le Brin de Zinc" required>
+                </div>
                 
-                <label for="customTechnicianEmail">Adresse mail:</label>
-                <input type="email" id="customTechnicianEmail">
+                <div class="form-group">
+                    <label for="venueAddress">Adresse de la salle:</label>
+                    <input type="text" id="venueAddress" value="3 Rte de la Peysse, 73000 Barberaz" required>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2>Informations d'accueil</h2>
+                <div class="form-group">
+                    <label for="technician">Technicien d'accueil:</label>
+                    <select id="technician" required onchange="toggleCustomTechnicianFields()">
+                        <option value="">Sélectionner</option>
+                        <option value="Julien">Julien</option>
+                        <option value="Antony">Antony</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <div id="customTechnicianFields" class="nested-form-group" style="display: none;">
+                    <div class="form-group">
+                        <label for="customTechnicianName">Prénom:</label>
+                        <input type="text" id="customTechnicianName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customTechnicianEmail">Adresse mail:</label>
+                        <input type="email" id="customTechnicianEmail">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customTechnicianPhone">Numéro de téléphone:</label>
+                        <input type="tel" id="customTechnicianPhone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="runToStation">Run à la gare:</label>
+                    <select id="runToStation" onchange="toggleRunToStationFields()">
+                        <option value="non">Non</option>
+                        <option value="oui">Oui</option>
+                    </select>
+                </div>
+
+                <div id="runToStationFields" class="nested-form-group" style="display: none;">
+                    <div class="form-group">
+                        <label for="stationTime">Horaire:</label>
+                        <input type="time" id="stationTime">
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2>Configuration des groupes</h2>
+                <div class="form-group">
+                    <label for="numBands">Nombre de groupes:</label>
+                    <input type="number" id="numBands" min="1" required onchange="updateBands()">
+                </div>
                 
-                <label for="customTechnicianPhone">Numéro de téléphone:</label>
-                <input type="tel" id="customTechnicianPhone">
+                <div id="bandsContainer" class="bands-section"></div>
+            </section>
+
+            <section class="form-section">
+                <h2>Horaires</h2>
+                <div class="form-group">
+                    <label for="mealTime">Horaire du repas:</label>
+                    <input type="time" id="mealTime" value="19:00" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="publicOpeningTime">Horaire d'ouverture public:</label>
+                    <input type="time" id="publicOpeningTime" value="20:00" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="concertStartTime">Heure de début du concert:</label>
+                    <input type="time" id="concertStartTime" value="21:00" required onchange="updateConcertEndTime()">
+                </div>
+
+                <div class="form-group">
+                    <label for="concertEndTime">Horaire de fin de concert:</label>
+                    <input type="time" id="concertEndTime" value="00:00" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="publicClosingTime">Horaire de fermeture public:</label>
+                    <input type="time" id="publicClosingTime" value="01:00" required>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2>Commentaires additionnels</h2>
+                <div class="form-group">
+                    <label for="comments">Commentaires:</label>
+                    <textarea id="comments" rows="4" placeholder="Merci de nous prévenir si besoin d'un run à la gare. Tarifs taxi : 20€ (de nuit et le dimanche) • 15€ (en journée et en semaine)"></textarea>
+                </div>
+            </section>
+            
+            <div class="form-actions">
+                <button type="button" id="generateRoadmapButton" onclick="generateRoadmap()" class="primary-button">Générer la feuille de route</button>
             </div>
-
-            <label for="runToStation">Run à la gare:</label>
-            <select id="runToStation" onchange="toggleRunToStationFields()">
-                <option value="non">Non</option>
-                <option value="oui">Oui</option>
-            </select>
-
-            <div id="runToStationFields" style="display: none;">
-                <label for="stationTime">Horaire:</label>
-                <input type="time" id="stationTime">
-            </div>
-            
-            <label for="numBands">Nombre de groupes:</label>
-            <input type="number" id="numBands" min="1" required onchange="updateBands()">
-            
-            <div id="bandsContainer"></div>
-            
-            <label for="mealTime">Horaire du repas:</label>
-            <input type="time" id="mealTime" value="19:00" required>
-            
-            <label for="publicOpeningTime">Horaire d'ouverture public:</label>
-            <input type="time" id="publicOpeningTime" value="20:00" required>
-            
-            <label for="concertStartTime">Heure de début du concert:</label>
-            <input type="time" id="concertStartTime" value="21:00" required onchange="updateConcertEndTime()">
-
-            <label for="concertEndTime">Horaire de fin de concert:</label>
-            <input type="time" id="concertEndTime" value="00:00" readonly>
-            
-            <label for="publicClosingTime">Horaire de fermeture public:</label>
-            <input type="time" id="publicClosingTime" value="01:00" required>
-            
-            <label for="comments">Commentaires:</label>
-            <textarea id="comments" rows="4" placeholder="Merci de nous prévenir si besoin d’un run à la gare. Tarifs taxi : 20€ (de nuit et le dimanche) • 15€ (en journée et en semaine)"></textarea>
-            
-            <button type="button" id="generateRoadmapButton" onclick="generateRoadmap()">Générer la feuille de route</button>
         </form>
         
-        <div id="roadmapPreview"></div>
-        
-        <button onclick="saveAsPDF()">Sauvegarder en PDF</button>
+        <div class="preview-section">
+            <div id="roadmapPreview"></div>
+            <div class="preview-actions">
+                <button onclick="saveAsPDF()" class="secondary-button">Sauvegarder en PDF</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
