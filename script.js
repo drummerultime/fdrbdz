@@ -141,6 +141,7 @@ function formatDate(date) {
 }
 
 function generateRoadmap() {
+    const eventName = document.getElementById('eventName').value;
     const concertDate = document.getElementById('concertDate').value;
     const venueName = document.getElementById('venueName').value;
     const venueAddress = document.getElementById('venueAddress').value;
@@ -156,7 +157,7 @@ function generateRoadmap() {
     const publicClosingTime = document.getElementById('publicClosingTime').value;
     const comments = document.getElementById('comments').value;
 
-    let roadmapHtml = `<h2>Feuille de Route</h2>`;
+    let roadmapHtml = `<h2>${eventName}</h2>`;
     roadmapHtml += `<p>Date du concert: ${formatDate(concertDate)}</p>`;
     roadmapHtml += `<p>Salle: ${venueName}</p>`;
     roadmapHtml += `<p>Adresse: ${venueAddress}</p>`;

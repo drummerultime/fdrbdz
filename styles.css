@@ -1,72 +1,161 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: #f5f7fa;
     margin: 0;
-    padding: 0;
+    padding: 2rem 0;
+    color: #2d3748;
+    line-height: 1.5;
 }
 
 .container {
-    width: 80%;
+    width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
     background: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
+    color: #1a365d;
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 label {
-    margin-top: 10px;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
-input, select, button, textarea {
-    padding: 10px;
-    margin-top: 5px;
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #2d3748;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
 }
 
 textarea {
     resize: vertical;
+    min-height: 100px;
 }
 
 #roadmapPreview {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    position: relative;
+    margin-top: 2.5rem;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    line-height: 1.6;
+}
+
+#roadmapPreview h2 {
+    color: #1a365d;
+    font-size: 1.875rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+#roadmapPreview h3 {
+    color: #2d4a8c;
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+    font-weight: 500;
+}
+
+#roadmapPreview p {
+    margin: 0.75rem 0;
 }
 
 button {
-    background-color: #007BFF;
+    background-color: #4299e1;
     color: #fff;
     border: none;
+    border-radius: 6px;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1rem;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #2b6cb0;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 .band {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 10px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
     position: relative;
 }
 
 .band .delete-band-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1rem;
+    right: 1rem;
+    background-color: #fc8181;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.band .delete-band-button:hover {
+    background-color: #e53e3e;
 }
 
 .italic {
     font-style: italic;
-    font-size: 0.9em;
+    color: #718096;
+    font-size: 0.9375rem;
+}
+
+#customTechnicianFields, #runToStationFields {
+    background-color: #f8fafc;
+    padding: 1.25rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    form {
+        gap: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.875rem;
+    }
 }
