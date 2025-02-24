@@ -25,6 +25,14 @@ h1 {
     font-weight: 600;
 }
 
+.logo {
+    display: block;
+    margin: 0 auto 2rem;
+    max-width: 595px; /* A4 width in pixels */
+    width: 100%;
+    height: auto;
+}
+
 form {
     display: grid;
     gap: 1.5rem;

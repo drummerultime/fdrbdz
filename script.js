@@ -157,7 +157,7 @@ function generateRoadmap() {
     const publicClosingTime = document.getElementById('publicClosingTime').value;
     const comments = document.getElementById('comments').value;
 
-    let roadmapHtml = `<h2>${eventName}</h2>`;
+    let roadmapHtml = `<div style="text-align: center; margin-bottom: 1.5rem;"><img src="logo.png" alt="Le Brin de Zinc" style="max-width: 595px; width: 100%; height: auto;"></div><h2>${eventName}</h2>`;
     roadmapHtml += `<p>Date du concert: ${formatDate(concertDate)}</p>`;
     roadmapHtml += `<p>Salle: ${venueName}</p>`;
     roadmapHtml += `<p>Adresse: ${venueAddress}</p>`;
@@ -237,8 +237,11 @@ function saveAsPDF() {
     const roadmapPreview = document.getElementById('roadmapPreview').innerHTML;
     const pdfWindow = window.open('', '', 'width=800,height=600');
     pdfWindow.document.write('<html><head><title>Feuille de Route</title>');
+    pdfWindow.document.write('<link rel="stylesheet" href="styles.css">');
     pdfWindow.document.write('</head><body>');
+    pdfWindow.document.write('<div class="container">');
     pdfWindow.document.write(roadmapPreview);
+    pdfWindow.document.write('</div>');
     pdfWindow.document.write('</body></html>');
     pdfWindow.document.close();
     pdfWindow.print();
